@@ -19,4 +19,4 @@ npm run dev
 npm test
 ```
 
-Проект работает на vinext и публикуется через Sites. Контакт для новых обращений: `hello@leontieva.media`.
+Проект работает на vinext и публикуется через Sites. Контакт для новых обращений: `pr@leontieva-media.ru`.

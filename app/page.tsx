@@ -158,9 +158,9 @@ export default async function Home() {
         <div className="contact-copy"><p className="section-kicker">Первый шаг</p><h2>Начнём с короткого медиаразбора</h2><p>Опишите задачу в нескольких предложениях. На первом разговоре определим, есть ли смысл в диагностике, стратегической сессии или сопровождении.</p><div className="contact-prompts"><span>Кто вы и чем занимаетесь?</span><span>Какую публичную задачу хотите решить?</span><span>Что уже пробовали?</span></div></div>
         <div className="contact-card">
           <p className="contact-label">Напишите нам</p>
-          <a className="contact-email" href="mailto:hello@leontieva.media?subject=Запрос%20на%20медиаразбор">hello@leontieva.media</a>
+          <a className="contact-email" href="mailto:pr@leontieva-media.ru?subject=Запрос%20на%20медиаразбор">pr@leontieva-media.ru</a>
           <p>Коротко расскажите о себе, публичной задаче и о том, что уже пробовали. Ответим и предложим подходящий первый шаг.</p>
-          <a className="button button-gold contact-button" href="mailto:hello@leontieva.media?subject=Запрос%20на%20медиаразбор">Написать на почту</a>
+          <a className="button button-gold contact-button" href="mailto:pr@leontieva-media.ru?subject=Запрос%20на%20медиаразбор">Написать на почту</a>
         </div>
       </section>
 

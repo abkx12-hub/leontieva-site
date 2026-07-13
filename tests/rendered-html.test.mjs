@@ -32,7 +32,8 @@ test("server-renders the LEONTIEVA landing page", async () => {
   assert.match(html, /<title>LEONTIEVA — продюсерский центр Елены Леонтьевой<\/title>/i);
   assert.match(html, /Выводим бизнес и основателей/);
   assert.match(html, /Медиадиагностика/);
-  assert.match(html, /hello@leontieva\.media/);
+  assert.match(html, /pr@leontieva-media\.ru/);
+  assert.doesNotMatch(html, /hello@leontieva\.media/);
   assert.doesNotMatch(html, /Черновая версия|Your site is taking shape|codex-preview/i);
 });
 
