@@ -2,14 +2,14 @@ import assert from "node:assert/strict";
 import { access } from "node:fs/promises";
 import test from "node:test";
 
-async function render() {
+async function render(url = "http://localhost/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
+    new Request(url, {
+      headers: { accept: "text/html", host: new URL(url).host },
     }),
     {
       ASSETS: {
@@ -42,4 +42,10 @@ test("includes the required brand assets", async () => {
     access(new URL("../public/lm-brand-panel.png", import.meta.url)),
     access(new URL("../public/process-example.png", import.meta.url)),
   ]);
+});
+
+test("redirects reserve domains to leontieva.media", async () => {
+  const response = await render("https://leontievamedia.ru/");
+  assert.equal(response.status, 307);
+  assert.equal(response.headers.get("location"), "https://leontieva.media/");
 });

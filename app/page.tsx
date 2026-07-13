@@ -1,3 +1,12 @@
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+
+const redirectHosts = new Set([
+  "www.leontieva.media",
+  "leontievamedia.ru",
+  "www.leontievamedia.ru",
+]);
+
 const services = [
   {
     number: "01",
@@ -53,7 +62,16 @@ const cases = [
   },
 ];
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const requestHeaders = await headers();
+  const host = (requestHeaders.get("host") ?? "").split(":")[0].toLowerCase();
+
+  if (redirectHosts.has(host)) {
+    redirect("https://leontieva.media");
+  }
+
   return (
     <main>
       <header className="site-header">
