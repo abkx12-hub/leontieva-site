@@ -2,7 +2,7 @@
 
 Официальный сайт продюсерского центра Елены Леонтьевой.
 
-Основной адрес: [www.leontieva.media](https://www.leontieva.media)
+Основной адрес: [leontieva.media](https://leontieva.media)
 
 ## Направления
 

@@ -45,13 +45,17 @@ test("includes the required brand assets", async () => {
   ]);
 });
 
-test("serves the active www domain without redirecting it", async () => {
-  const response = await render("https://www.leontieva.media/");
+test("serves the active apex domain without redirecting it", async () => {
+  const response = await render("https://leontieva.media/");
   assert.equal(response.status, 200);
 });
 
-test("redirects reserve domains to www.leontieva.media", async () => {
+test("redirects www and reserve domains to leontieva.media", async () => {
+  const wwwResponse = await render("https://www.leontieva.media/");
+  assert.equal(wwwResponse.status, 307);
+  assert.equal(wwwResponse.headers.get("location"), "https://leontieva.media/");
+
   const response = await render("https://leontievamedia.ru/");
   assert.equal(response.status, 307);
-  assert.equal(response.headers.get("location"), "https://www.leontieva.media/");
+  assert.equal(response.headers.get("location"), "https://leontieva.media/");
 });
