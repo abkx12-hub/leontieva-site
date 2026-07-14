@@ -45,8 +45,13 @@ test("includes the required brand assets", async () => {
   ]);
 });
 
-test("redirects reserve domains to leontieva.media", async () => {
+test("serves the active www domain without redirecting it", async () => {
+  const response = await render("https://www.leontieva.media/");
+  assert.equal(response.status, 200);
+});
+
+test("redirects reserve domains to www.leontieva.media", async () => {
   const response = await render("https://leontievamedia.ru/");
   assert.equal(response.status, 307);
-  assert.equal(response.headers.get("location"), "https://leontieva.media/");
+  assert.equal(response.headers.get("location"), "https://www.leontieva.media/");
 });

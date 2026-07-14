@@ -2,7 +2,6 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 const redirectHosts = new Set([
-  "www.leontieva.media",
   "leontievamedia.ru",
   "www.leontievamedia.ru",
 ]);
@@ -69,7 +68,7 @@ export default async function Home() {
   const host = (requestHeaders.get("host") ?? "").split(":")[0].toLowerCase();
 
   if (redirectHosts.has(host)) {
-    redirect("https://leontieva.media");
+    redirect("https://www.leontieva.media");
   }
 
   return (
