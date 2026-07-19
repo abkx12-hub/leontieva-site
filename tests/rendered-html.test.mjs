@@ -29,10 +29,12 @@ test("server-renders the LEONTIEVA landing page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>LEONTIEVA — продюсерский центр Елены Леонтьевой<\/title>/i);
-  assert.match(html, /Выводим бизнес и основателей/);
-  assert.match(html, /Медиадиагностика/);
+  assert.match(html, /<title>LEONTIEVA — продюсерский центр управляемой публичной траектории<\/title>/i);
+  assert.match(html, /Выстраиваем управляемую/);
+  assert.match(html, /GR и работа со стейкхолдерами/);
+  assert.match(html, /Елена и её люди/);
   assert.match(html, /pr@leontieva-media\.ru/);
+  assert.doesNotMatch(html, /Павел|STULER|Борисыч/i);
   assert.doesNotMatch(html, /hello@leontieva\.media/);
   assert.doesNotMatch(html, /Черновая версия|Your site is taking shape|codex-preview/i);
 });

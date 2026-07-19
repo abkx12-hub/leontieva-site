@@ -1,170 +1,60 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-const redirectHosts = new Set([
-  "www.leontieva.media",
-  "leontievamedia.ru",
-  "www.leontievamedia.ru",
-]);
+const redirectHosts = new Set(["www.leontieva.media", "leontievamedia.ru", "www.leontievamedia.ru"]);
 
 const services = [
-  {
-    number: "01",
-    label: "Начать отсюда",
-    title: "Медиадиагностика",
-    text: "Разбираем текущий публичный образ, материалы, задачу и ограничения. Показываем, что усиливать и в какой последовательности.",
-    points: ["разбор позиционирования", "сильные темы и риски", "варианты первого маршрута"],
-    link: "Запросить диагностику →",
-  },
-  {
-    number: "02",
-    title: "Стратегическая сессия",
-    text: "Собираем цель, аудитории, роль, доказательства и направления развития в единую рабочую карту.",
-    points: ["протокол решений", "карта смыслов", "дорожная карта"],
-    link: "Обсудить задачу →",
-  },
-  {
-    number: "03",
-    title: "Продюсерское сопровождение",
-    text: "Управляем медиапланом, подготовкой активностей, командой и регулярной корректировкой стратегии.",
-    points: ["календарь и медиаплан", "подготовка к выходам", "анализ и следующий шаг"],
-    link: "Узнать о формате →",
-  },
+  { number: "01", label: "Основа работы", title: "Стратегическое решение", text: "Собираем цель, роль, факты, ограничения и сценарии в согласованный маршрут.", points: ["диагностика и стратегическая сессия", "протокол решений", "дорожная карта на 90 дней"] },
+  { number: "02", title: "Продюсерское и PR-сопровождение", text: "Управляем позиционированием, темами, медиапланом, материалами и регулярной корректировкой.", points: ["ключевые сообщения", "календарь и подготовка выходов", "еженедельный статус и следующий шаг"] },
+  { number: "03", title: "Медиа, видео и эфиры", text: "Готовим спикера и материалы, координируем производство, версии, права и использование.", points: ["интервью, ТВ и подкасты", "тезисы и сложные вопросы", "принятые файлы и материалы"] },
+  { number: "04", title: "Общественные проекты", text: "Превращаем идею в понятный проект с участниками, ответственными и данными проверки.", points: ["паспорт и логика проекта", "пилот или программа", "критерии продолжения или остановки"] },
+  { number: "05", title: "GR и работа со стейкхолдерами", text: "Помогаем выстраивать законный и управляемый диалог с деловыми, отраслевыми, общественными и государственными структурами.", points: ["карта участников и рисков", "позиция и подготовка встреч", "протокол и контроль следующего шага"] },
 ];
 
 const cases = [
-  {
-    type: "Производственная компания",
-    title: "От отдельных выходов — к сопровождению первого лица",
-    rows: [
-      ["Задача", "Собрать образ предпринимателя и связать его с реальными достижениями бизнеса."],
-      ["Работа", "Позиционирование, темы, медиаплан, календарь, подготовка интервью."],
-      ["Результат", "Единая модель регулярного сопровождения вместо разовых PR-активностей."],
-    ],
-  },
-  {
-    type: "Экспертный проект",
-    title: "Подготовка к ТВ, интервью и публичным выступлениям",
-    rows: [
-      ["Задача", "Сделать экспертизу понятной редакции и аудитории."],
-      ["Работа", "Темы, тезисы, сложные вопросы, репетиция подачи и материалы."],
-      ["Результат", "Готовность к выходам и материалы, которые можно использовать повторно."],
-    ],
-  },
-  {
-    type: "Стратегический контур",
-    title: "Когда медийная задача связана с бизнесом и партнёрствами",
-    rows: [
-      ["Задача", "Разделить несколько целей и не смешать их в одном медиаплане."],
-      ["Работа", "Стратегическая сессия, сценарии, риски, роли и контрольные точки."],
-      ["Результат", "Маршрутная карта и отдельные проекты с понятными границами."],
-    ],
-  },
+  { type: "Производственная компания", title: "От отдельных выходов — к управляемой системе", rows: [["Задача", "Связать публичную роль первого лица с реальными фактами бизнеса."], ["Работа", "Стратегическая сессия, позиционирование, доказательная база, темы и календарь."], ["Результат", "Согласованный 90-дневный маршрут с владельцами, сроками и контрольными точками."]] },
+  { type: "Репутационный риск", title: "Интервью остановлено до публикации", rows: [["Задача", "Понять, усиливает ли большой материал позицию героя или создаёт новые риски."], ["Работа", "Фактчекинг, редакционный разбор, оценка контекста и возможного использования."], ["Результат", "Длинная версия не выпущена; выделены безопасные фрагменты и создан стандарт будущих интервью."]] },
+  { type: "Медиа и эфиры", title: "Экспертиза подготовлена к разным форматам", rows: [["Задача", "Сделать сложную экспертизу понятной редакции, ведущему и аудитории."], ["Работа", "Темы, тезисы, сложные вопросы, подготовка подачи и координация записи."], ["Результат", "Принятые материалы и подготовленный спикер; фрагменты можно использовать повторно."]] },
+  { type: "Общественный контур", title: "От общей идеи — к следующему измеримому шагу", rows: [["Задача", "Разделить интересы участников, риски, публичную позицию и реальные полномочия."], ["Работа", "Карта стейкхолдеров, материалы к встрече, сценарии, протокол и контроль решений."], ["Результат", "Зафиксированы позиции, ответственные и решение о следующем шаге."]] },
 ];
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const requestHeaders = await headers();
-  const host = (requestHeaders.get("host") ?? "").split(":")[0].toLowerCase();
-
-  if (redirectHosts.has(host)) {
-    redirect("https://leontieva.media");
-  }
+  const host = ((await headers()).get("host") ?? "").split(":")[0].toLowerCase();
+  if (redirectHosts.has(host)) redirect("https://leontieva.media");
 
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="LEONTIEVA — продюсерский центр, на главную">
-          <img src="/lm-icon.jpg" alt="" />
-          <span><strong>LEONTIEVA</strong><small>ПРОДЮСЕРСКИЙ ЦЕНТР</small></span>
-        </a>
-        <nav aria-label="Навигация">
-          <a href="#services">Форматы</a><a href="#approach">Подход</a><a href="#cases">Кейсы</a><a href="#team">Команда</a>
-        </nav>
+        <a className="brand" href="#top" aria-label="LEONTIEVA — продюсерский центр, на главную"><img src="/lm-icon.jpg" alt="" /><span><strong>LEONTIEVA</strong><small>ПРОДЮСЕРСКИЙ ЦЕНТР</small></span></a>
+        <nav aria-label="Навигация"><a href="#services">Направления</a><a href="#approach">Как работаем</a><a href="#cases">Практика</a><a href="#team">О центре</a></nav>
         <a className="header-cta" href="#contact">Обсудить задачу</a>
       </header>
 
-      <section className="hero" id="top">
-        <div className="hero-copy">
-          <p className="eyebrow">Продюсерский центр для бизнеса и экспертов</p>
-          <h1>Выводим бизнес и основателей <em>в публичное поле</em></h1>
-          <p className="hero-lead">Строим не набор публикаций, а систему: позиционирование, сильные темы, подготовка к СМИ, календарь активностей и анализ результата.</p>
-          <div className="hero-actions">
-            <a className="button button-gold" href="#contact">Получить медиаразбор</a>
-            <a className="text-link text-link-light" href="#cases">Посмотреть, как мы работаем <span>↘</span></a>
-          </div>
-          <p className="hero-note">Без обещаний «гарантированного эфира». Сначала — задача, факты и подходящий маршрут.</p>
-        </div>
-        <div className="hero-media">
-          <img src="/lm-brand-panel.png" alt="LEONTIEVA — стратегия, медиа, доверие" />
-          <div className="hero-media-caption"><span>Стратегия</span><span>Медиа</span><span>Доверие</span></div>
-        </div>
-      </section>
+      <section className="hero" id="top"><div className="hero-copy"><p className="eyebrow">Продюсерский центр для основателей и компаний</p><h1>Выстраиваем управляемую <em>публичную траекторию</em></h1><p className="hero-lead">От фактов и стратегии — до запуска, принятого результата и измерения. Позиционирование, медиа, продюсирование, общественные проекты и законный GR-контур.</p><div className="hero-actions"><a className="button button-gold" href="#contact">Обсудить задачу</a><a className="text-link text-link-light" href="#approach">Посмотреть, как мы работаем <span>↘</span></a></div><p className="hero-note">С понятными границами, владельцами решений и критериями результата. Без обещаний, которые зависят от СМИ, органов власти или других третьих лиц.</p></div><div className="hero-media"><img src="/lm-brand-panel.png" alt="LEONTIEVA — стратегия, медиа, доверие" /><div className="hero-media-caption"><span>Факты</span><span>Стратегия</span><span>Результат</span></div></div></section>
 
-      <section className="trust-strip" aria-label="Основные направления">
-        <div><strong>01</strong><span>Медиастратегия</span></div><div><strong>02</strong><span>СМИ и ТВ</span></div><div><strong>03</strong><span>Продюсирование</span></div><div><strong>04</strong><span>Публичный образ</span></div>
-      </section>
+      <section className="trust-strip" aria-label="Основные направления"><div><strong>01</strong><span>Стратегия</span></div><div><strong>02</strong><span>Медиа</span></div><div><strong>03</strong><span>Продюсирование</span></div><div><strong>04</strong><span>GR и общественные проекты</span></div></section>
 
-      <section className="intro-section">
-        <div className="section-title"><p className="section-kicker">Когда нужен продюсерский подход</p><h2>Экспертиза уже есть.<br />Её нужно правильно показать.</h2></div>
-        <div className="intro-copy">
-          <p className="lead-paragraph">Мы подключаемся, когда отдельные интервью, соцсети и публикации не складываются в убедительный образ человека или бизнеса.</p>
-          <ul className="check-list"><li>непонятно, с какой темой выходить в публичное поле;</li><li>много материалов, но нет единой линии и календаря;</li><li>есть страх камеры или сложных вопросов;</li><li>подрядчики предлагают размещения, но не объясняют общую стратегию.</li></ul>
-        </div>
-      </section>
+      <section className="intro-section"><div className="section-title"><p className="section-kicker">Когда нужен продюсерский подход</p><h2>Задача сложнее,<br />чем просто публикация.</h2></div><div className="intro-copy"><p className="lead-paragraph">Мы подключаемся, когда публичные, деловые и репутационные задачи нужно собрать в одну понятную систему и довести до следующего измеримого шага.</p><ul className="check-list"><li>активностей много, но они не связаны с целью бизнеса;</li><li>нет единого позиционирования и проверенной доказательной базы;</li><li>предстоит интервью, сложная встреча или запуск общественной инициативы;</li><li>нужны владельцы решений, сроки, границы и контроль результата.</li></ul></div></section>
 
-      <section className="services-section" id="services">
-        <div className="section-heading"><div><p className="section-kicker">Три формата работы</p><h2>Понятный первый шаг.<br />Без лишнего объёма.</h2></div><p>Начинаем с минимального формата, который помогает принять решение. Большое сопровождение предлагаем только когда оно действительно нужно.</p></div>
-        <div className="service-grid">
-          {services.map((service, index) => (
-            <article className={`service-card ${index === 0 ? "service-card-featured" : ""}`} key={service.number}>
-              {service.label && <span className="card-label">{service.label}</span>}
-              <p className="service-number">{service.number}</p><h3>{service.title}</h3><p>{service.text}</p>
-              <ul>{service.points.map((point) => <li key={point}>{point}</li>)}</ul><a href="#contact">{service.link}</a>
-            </article>
-          ))}
-        </div>
-      </section>
+      <section className="services-section" id="services"><div className="section-heading"><div><p className="section-kicker">Пять направлений</p><h2>От решения —<br />к использованию.</h2></div><p>Сначала определяем, какой законченный продукт нужен клиенту. Затем фиксируем состав, срок, критерии приёмки и только после этого запускаем работу.</p></div><div className="service-grid service-grid-five">{services.map((service, index) => <article className={`service-card ${index === 0 ? "service-card-featured" : ""} ${index === 4 ? "service-card-gr" : ""}`} key={service.number}>{service.label && <span className="card-label">{service.label}</span>}<p className="service-number">{service.number}</p><h3>{service.title}</h3><p>{service.text}</p><ul>{service.points.map((point) => <li key={point}>{point}</li>)}</ul><a href={index === 4 ? "#gr" : "#contact"}>{index === 4 ? "Подробнее о границах →" : "Обсудить задачу →"}</a></article>)}</div></section>
 
-      <section className="approach-section" id="approach">
-        <div className="approach-copy"><p className="section-kicker">Почему это не обычный PR</p><h2>Система вместо случайных активностей</h2><p>Каждый выход должен быть связан с ролью клиента, задачей бизнеса и следующим шагом. Поэтому мы фиксируем решения, зависимости и результат — не держим проект в переписках и обещаниях.</p><ol className="mini-process"><li><b>Диагностика</b><span>цель, факты, ограничения</span></li><li><b>Стратегия</b><span>роль, темы, маршрут</span></li><li><b>Подготовка</b><span>календарь, материалы, площадки</span></li><li><b>Результат</b><span>выходы, анализ, корректировка</span></li></ol></div>
-        <figure className="process-figure"><img src="/process-example.png" alt="Пример карты продюсерского процесса" /><figcaption>Пример рабочей карты: от входных данных до контрольной точки и следующего решения.</figcaption></figure>
-      </section>
+      <section className="approach-section" id="approach"><div className="approach-copy"><p className="section-kicker">Как мы работаем</p><h2>Не занятость команды, а принятый продукт</h2><p>До начала работы называем конкретный результат, границы, срок, цену и критерии приёмки. Всё существенное фиксируется письменно.</p><ol className="mini-process seven-steps"><li><b>01 · Вход</b><span>владелец, задача, срок</span></li><li><b>02 · Результат</b><span>продукт, пользователь, критерии</span></li><li><b>03 · Предложение</b><span>объём, цена, границы, риски</span></li><li><b>04 · Старт</b><span>договор, оплата, вводные, доступы</span></li><li><b>05 · Производство</b><span>работа, фактчекинг, версии</span></li><li><b>06 · Запуск</b><span>передача и письменная приёмка</span></li><li><b>07 · Оценка</b><span>использование, реакция, следующий цикл</span></li></ol></div><figure className="process-figure"><img src="/process-example.png" alt="Пример карты продюсерского процесса" /><figcaption>Рабочая карта связывает факты, решения, владельцев, сроки и контрольные точки.</figcaption></figure></section>
 
-      <section className="cases-section" id="cases">
-        <div className="section-heading"><div><p className="section-kicker">Примеры задач</p><h2>Не обещания.<br />Логика реальной работы.</h2></div><p>Публичные версии кейсов пока обезличены. После согласования добавим имена, фотографии, площадки и подтверждённые результаты.</p></div>
-        <div className="case-grid">
-          {cases.map((item) => <article className="case-card" key={item.title}><p className="case-type">{item.type}</p><h3>{item.title}</h3><dl>{item.rows.map(([term, description]) => <div key={term}><dt>{term}</dt><dd>{description}</dd></div>)}</dl></article>)}
-        </div>
-      </section>
+      <section className="measurement-section"><div><p className="section-kicker">Как понимаем результат</p><h2>Измеряем не только выход,<br />но и его использование.</h2></div><div className="measurement-grid"><article><span>0</span><b>Приёмка</b><p>Комплект передан и соответствует согласованным критериям.</p></article><article><span>7</span><b>Использование</b><p>Понятно, кем и как результат введён в работу.</p></article><article><span>30</span><b>Ближайший результат</b><p>Проверяем реакцию, качество и необходимую корректировку.</p></article><article><span>90</span><b>Следующий цикл</b><p>Решаем: продолжить, изменить, усилить или остановить.</p></article></div></section>
 
-      <section className="scope-section">
-        <div><p className="section-kicker">Больше, чем PR</p><h2>Дополнительные контуры — только когда они нужны</h2></div>
-        <div className="scope-grid"><article><b>Стратегический офис</b><p>Сведение публичных, бизнес- и репутационных задач в одну управленческую карту.</p></article><article><b>Книга и собственное медиа</b><p>Отдельные редакционные проекты с собственной целью, командой и бюджетом.</p></article><article><b>Переговорная архитектура</b><p>Подготовка сложных встреч, рамок, вопросов, решений и следующих шагов.</p></article><article><b>Специальные проекты</b><p>Партнёрские, общественные и репутационные инициативы после отдельной диагностики.</p></article></div>
-      </section>
+      <section className="cases-section" id="cases"><div className="section-heading"><div><p className="section-kicker">Практика</p><h2>Результат иногда —<br />не публиковать.</h2></div><p>Кейсы обезличены: показываем профессиональную логику и проверяемые рабочие результаты, не раскрывая клиентов и чувствительные сведения.</p></div><div className="case-grid case-grid-four">{cases.map((item) => <article className="case-card" key={item.title}><p className="case-type">{item.type}</p><h3>{item.title}</h3><dl>{item.rows.map(([term, description]) => <div key={term}><dt>{term}</dt><dd>{description}</dd></div>)}</dl></article>)}</div></section>
 
-      <section className="fit-section">
-        <div className="fit-card fit-card-positive"><p className="section-kicker">Подойдём, если</p><h3>У вас есть факты, опыт и готовность участвовать</h3><p>Вы хотите выстроить долгосрочное доверие, готовы давать материалы, выделять время и принимать решения по этапам.</p></div>
-        <div className="fit-card"><p className="section-kicker">Не подойдём, если</p><h3>Нужна известность «быстро и гарантированно»</h3><p>Мы не продаём обещания конкретного эфира, искусственный хайп, скрытое влияние и публикации ради количества.</p></div>
-      </section>
+      <section className="gr-section" id="gr"><div><p className="section-kicker">GR и общественные проекты</p><h2>Законный диалог.<br />Без продажи доступа.</h2></div><div className="gr-copy"><p className="lead-paragraph">Помогаем компаниям и лидерам выстраивать управляемое взаимодействие с органами власти, отраслевыми, деловыми и общественными структурами.</p><ul className="check-list"><li>проверяем исходные данные, интересы и риски;</li><li>собираем карту стейкхолдеров и решений;</li><li>готовим позицию, материалы и сложные встречи;</li><li>фиксируем договорённости и контролируем следующий шаг.</li></ul><p className="boundary-note"><b>Граница:</b> мы не гарантируем решения органов власти и третьих лиц, не продаём доступ, должности или административный результат. Политические и избирательные задачи рассматриваются отдельно — после профильной правовой проверки.</p></div></section>
 
-      <section className="team-section" id="team">
-        <div className="section-heading"><div><p className="section-kicker">Кто ведёт проект</p><h2>Личное внимание.<br />Подключаемая команда.</h2></div><p>Ключевые решения не передаются младшему менеджеру. Подрядчиков подключаем только под согласованный объём.</p></div>
-        <div className="team-grid"><article><span className="monogram">ЕЛ</span><div><p className="person-role">Главный продюсер</p><h3>Елена Леонтьева</h3><p>Медийная стратегия, публичный образ, раскрытие экспертности, подготовка подачи и контроль качества.</p></div></article><article><span className="monogram">П</span><div><p className="person-role">Стратегический партнёр</p><h3>Павел</h3><p>Стратегические сессии, переговоры, дорожные карты, операционная система, риски и следующий шаг.</p></div></article></div>
-      </section>
+      <section className="fit-section"><div className="fit-card fit-card-positive"><p className="section-kicker">Подойдём, если</p><h3>У вас есть факты, опыт и готовность принимать решения</h3><p>Вы хотите выстроить долгосрочное доверие и готовы работать по понятным этапам.</p></div><div className="fit-card"><p className="section-kicker">Не подойдём, если</p><h3>Нужны быстрые обещания и скрытое влияние</h3><p>Мы не продаём гарантированные эфиры, искусственный хайп, доступ к должностным лицам или решения третьих лиц.</p></div></section>
 
-      <section className="contact-section" id="contact">
-        <div className="contact-copy"><p className="section-kicker">Первый шаг</p><h2>Начнём с короткого медиаразбора</h2><p>Опишите задачу в нескольких предложениях. На первом разговоре определим, есть ли смысл в диагностике, стратегической сессии или сопровождении.</p><div className="contact-prompts"><span>Кто вы и чем занимаетесь?</span><span>Какую публичную задачу хотите решить?</span><span>Что уже пробовали?</span></div></div>
-        <div className="contact-card">
-          <p className="contact-label">Напишите нам</p>
-          <a className="contact-email" href="mailto:pr@leontieva-media.ru?subject=Запрос%20на%20медиаразбор">pr@leontieva-media.ru</a>
-          <p>Коротко расскажите о себе, публичной задаче и о том, что уже пробовали. Ответим и предложим подходящий первый шаг.</p>
-          <a className="button button-gold contact-button" href="mailto:pr@leontieva-media.ru?subject=Запрос%20на%20медиаразбор">Написать на почту</a>
-        </div>
-      </section>
+      <section className="team-section" id="team"><div className="section-heading"><div><p className="section-kicker">Кто ведёт проект</p><h2>Елена и её люди<br />в медиа.</h2></div><p>Состав команды определяется задачей. Ключевые решения и качество публичной траектории остаются под личным контролем главного продюсера.</p></div><div className="team-grid team-grid-single"><article><span className="monogram">ЕЛ</span><div><p className="person-role">Основатель и главный продюсер</p><h3>Елена Леонтьева</h3><p>Отвечает за публичную логику, позиционирование, подготовку первого лица, качество материалов и ключевые решения по траектории.</p></div></article><article className="team-capabilities"><p className="person-role">Под задачу</p><h3>Проектная команда</h3><p>Редакторы, медиапродюсеры, телевизионные и съёмочные команды, дизайнеры, аналитики, юристы и отраслевые эксперты.</p></article></div></section>
 
-      <footer><a className="brand footer-brand" href="#top"><img src="/lm-icon.jpg" alt="" /><span><strong>LEONTIEVA</strong><small>ПРОДЮСЕРСКИЙ ЦЕНТР</small></span></a><p>Стратегия · Медиа · Доверие</p><p>© 2026 LEONTIEVA</p></footer>
+      <section className="contact-section" id="contact"><div className="contact-copy"><p className="section-kicker">Первый шаг</p><h2>Сначала определим, что должно измениться</h2><p>На первом разговоре проверим, можем ли быть полезны, и определим подходящий продукт.</p><div className="contact-prompts"><span>Кто вы и чем занимаетесь?</span><span>Что и для кого должно измениться?</span><span>Что уже сделано и к какому сроку нужен результат?</span></div></div><div className="contact-card"><p className="contact-label">Напишите нам</p><a className="contact-email" href="mailto:pr@leontieva-media.ru?subject=Обсудить%20задачу">pr@leontieva-media.ru</a><p>Ответим, уточним вводные и предложим следующий шаг. Стоимость определяется после короткой диагностики задачи и состава продукта.</p><a className="button button-gold contact-button" href="mailto:pr@leontieva-media.ru?subject=Обсудить%20задачу">Обсудить задачу</a></div></section>
+
+      <footer><a className="brand footer-brand" href="#top"><img src="/lm-icon.jpg" alt="" /><span><strong>LEONTIEVA</strong><small>ПРОДЮСЕРСКИЙ ЦЕНТР</small></span></a><p>Факты · Стратегия · Результат</p><p>© 2026 LEONTIEVA</p></footer>
     </main>
   );
 }
