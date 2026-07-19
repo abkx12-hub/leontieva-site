@@ -35,7 +35,8 @@ test("server-renders the LEONTIEVA landing page", async () => {
   assert.match(html, /Ключевые решения — лично у Елены/);
   assert.match(html, /Мы не выдаём список советов\. Мы ведём по маршруту/);
   assert.match(html, /Одна цель — один контур работы/);
-  assert.match(html, /elena-hero-v3\.jpg/);
+  assert.match(html, /elena-hero-v4\.jpg/);
+  assert.match(html, /elena-production-v4\.jpg/);
   assert.match(html, /pr@leontieva-media\.ru/);
   assert.doesNotMatch(html, /Павел|STULER|Борисыч/i);
   assert.doesNotMatch(html, /hello@leontieva\.media/);

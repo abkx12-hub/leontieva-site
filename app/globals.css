@@ -272,7 +272,7 @@ footer > p { color: #8390a1; }
 .hero-v3 .hero-lead { max-width: 690px; }
 .hero-portrait { width: min(100%, 500px); margin: 0; isolation: isolate; }
 .hero-portrait::before { inset: -22px 22px 22px -22px; z-index: -1; }
-.hero-portrait img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 28%; filter: saturate(.9) contrast(1.02); }
+.hero-portrait img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 21%; filter: saturate(.86) contrast(1.03); }
 .hero-person {
   position: absolute;
   right: -26px;
@@ -293,6 +293,7 @@ footer > p { color: #8390a1; }
 .editorial-stage { position: relative; min-height: 680px; overflow: hidden; background: #b5aea4; box-shadow: 0 28px 70px rgba(46, 34, 27, .18); }
 .editorial-stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,26,46,.18), transparent 42%, rgba(251,250,247,.05)); pointer-events: none; }
 .editorial-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 31%; filter: saturate(.84) contrast(1.03); }
+.editorial-photo-production { object-position: center 42%; filter: saturate(.78) contrast(1.07); }
 .editorial-card { position: relative; z-index: 1; width: 51%; min-height: 680px; margin-left: auto; padding: clamp(44px, 6vw, 78px); display: flex; flex-direction: column; justify-content: center; background: rgba(251,250,247,.94); backdrop-filter: blur(12px); }
 .editorial-card h2, .team-copy h2 { margin-bottom: 26px; font-size: clamp(42px, 4.25vw, 64px); line-height: 1.04; }
 .editorial-card .lead-paragraph { font-size: 18px; }
@@ -343,6 +344,7 @@ footer > p { color: #8390a1; }
   .editorial-stage { min-height: 0; overflow: visible; box-shadow: none; background: transparent; }
   .editorial-stage::after { display: none; }
   .editorial-photo { position: relative; height: auto; aspect-ratio: 4 / 5; object-position: center 26%; }
+  .editorial-photo-production { object-position: 16% center; }
   .editorial-card { width: auto; min-height: 0; margin: 0; padding: 48px 40px; }
   .case-grid-two { grid-template-columns: 1fr; }
   .gr-v3, .team-v3 { grid-template-columns: 1fr; }
