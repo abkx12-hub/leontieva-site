@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function render(url = "http://localhost/") {
@@ -49,9 +49,22 @@ test("includes the required brand assets", async () => {
     access(new URL("../public/lm-brand-panel.png", import.meta.url)),
     access(new URL("../public/process-example.png", import.meta.url)),
     access(new URL("../public/process-flow-client-v2.png", import.meta.url)),
-    access(new URL("../public/elena-hero-v3.jpg", import.meta.url)),
+    access(new URL("../public/elena-hero-v4.jpg", import.meta.url)),
+    access(new URL("../public/elena-production-v4.jpg", import.meta.url)),
     access(new URL("../public/elena-about-v3.jpg", import.meta.url)),
     access(new URL("../public/elena-editorial-v3.jpg", import.meta.url)),
+  ]);
+});
+
+test("keeps the GitHub Pages shell in sync with the active imagery", async () => {
+  const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+
+  assert.match(html, /elena-hero-v4\.jpg/);
+  assert.match(html, /elena-production-v4\.jpg/);
+  assert.doesNotMatch(html, /elena-hero-v3\.jpg/);
+  await Promise.all([
+    access(new URL("../elena-hero-v4.jpg", import.meta.url)),
+    access(new URL("../elena-production-v4.jpg", import.meta.url)),
   ]);
 });
 
