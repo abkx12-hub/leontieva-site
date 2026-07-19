@@ -44,6 +44,7 @@ test("includes the required brand assets", async () => {
     access(new URL("../public/lm-icon.jpg", import.meta.url)),
     access(new URL("../public/lm-brand-panel.png", import.meta.url)),
     access(new URL("../public/process-example.png", import.meta.url)),
+    access(new URL("../public/process-flow-client-v2.png", import.meta.url)),
   ]);
 });
 

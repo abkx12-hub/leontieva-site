@@ -129,6 +129,9 @@ section:not(.hero):not(.trust-strip) { padding: 108px max(24px, calc((100vw - va
 .process-figure { margin: 0; padding: 18px; background: var(--cream); }
 .process-figure img { width: 100%; background: white; }
 .process-figure figcaption { padding: 15px 4px 2px; color: var(--muted); font-size: 11px; }
+.process-figure-premium { padding: 0; overflow: hidden; background: var(--navy); box-shadow: 0 30px 70px rgba(7, 26, 46, .16); }
+.process-figure-premium img { aspect-ratio: 16 / 9; object-fit: cover; background: var(--navy); }
+.process-figure-premium figcaption { padding: 18px 22px 20px; color: #bdc7d4; background: var(--navy); font-size: 12px; }
 
 .measurement-section { background: var(--cream); }
 .measurement-section > div:first-child { margin-bottom: 52px; }
