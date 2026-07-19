@@ -15,11 +15,23 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LEONTIEVA — продюсерский центр Елены Леонтьевой",
     description:
-      "От фактов и стратегии — до запуска, принятого результата и измерения.",
+      "Публичная траектория, которая работает на задачу бизнеса, лидера или общественного проекта.",
     url: "https://leontieva.media",
     siteName: "LEONTIEVA",
     locale: "ru_RU",
     type: "website",
+    images: [
+      {
+        url: "/elena-hero-v3.jpg",
+        width: 1330,
+        height: 1800,
+        alt: "Елена Леонтьева — основатель и главный продюсер LEONTIEVA",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/elena-hero-v3.jpg"],
   },
 };
 

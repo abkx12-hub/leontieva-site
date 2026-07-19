@@ -255,3 +255,109 @@ footer > p { color: #8390a1; }
 }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button-gold:hover { transform: none; } }
+
+/* V3 — editorial, senior-led presentation */
+.hero-v3 {
+  min-height: 780px;
+  grid-template-columns: minmax(0, 1fr) minmax(390px, .7fr);
+  gap: clamp(54px, 7vw, 108px);
+  padding-top: 66px;
+  padding-bottom: 66px;
+  background:
+    radial-gradient(circle at 76% 24%, rgba(92, 40, 57, .48) 0, rgba(7, 26, 46, 0) 31%),
+    linear-gradient(122deg, #061522 0%, #071a2e 58%, #101c2d 100%);
+}
+.hero-v3 h1 { max-width: 760px; font-size: clamp(54px, 5.5vw, 82px); }
+.hero-v3 .hero-lead { max-width: 690px; }
+.hero-portrait { width: min(100%, 500px); margin: 0; isolation: isolate; }
+.hero-portrait::before { inset: -22px 22px 22px -22px; z-index: -1; }
+.hero-portrait img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 28%; filter: saturate(.9) contrast(1.02); }
+.hero-person {
+  position: absolute;
+  right: -26px;
+  bottom: 32px;
+  width: min(82%, 350px);
+  padding: 18px 22px;
+  display: grid;
+  gap: 3px;
+  background: rgba(251, 250, 247, .94);
+  color: var(--ink);
+  box-shadow: 0 20px 55px rgba(0,0,0,.24);
+  backdrop-filter: blur(12px);
+}
+.hero-person span { font-family: Georgia, serif; font-size: 21px; }
+.hero-person small { color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+
+.editorial-section { background: #d8d0c4; }
+.editorial-stage { position: relative; min-height: 680px; overflow: hidden; background: #b5aea4; box-shadow: 0 28px 70px rgba(46, 34, 27, .18); }
+.editorial-stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,26,46,.18), transparent 42%, rgba(251,250,247,.05)); pointer-events: none; }
+.editorial-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 31%; filter: saturate(.84) contrast(1.03); }
+.editorial-card { position: relative; z-index: 1; width: 51%; min-height: 680px; margin-left: auto; padding: clamp(44px, 6vw, 78px); display: flex; flex-direction: column; justify-content: center; background: rgba(251,250,247,.94); backdrop-filter: blur(12px); }
+.editorial-card h2, .team-copy h2 { margin-bottom: 26px; font-size: clamp(42px, 4.25vw, 64px); line-height: 1.04; }
+.editorial-card .lead-paragraph { font-size: 18px; }
+.editorial-list { margin: 28px 0 0; padding: 0; list-style: none; counter-reset: editorial; border-top: 1px solid var(--line); }
+.editorial-list li { padding: 17px 0; display: grid; grid-template-columns: 130px 1fr; gap: 22px; border-bottom: 1px solid var(--line); }
+.editorial-list b { font-family: Georgia, serif; font-size: 16px; font-weight: 400; }
+.editorial-list span { color: var(--muted); font-size: 12px; }
+
+.services-v3 .service-card { min-height: 470px; }
+.services-v3 .service-card h3 { max-width: 310px; font-size: 32px; }
+.services-v3 .service-card-gr { background: #e7ded0; }
+
+.case-grid-two { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.case-grid-two .case-card { min-height: 470px; padding: clamp(30px, 4vw, 48px); }
+.case-grid-two .case-card h3 { max-width: 510px; font-size: clamp(29px, 3vw, 42px); }
+.case-card-accent { background: #101f31; border-color: rgba(198,161,91,.45); }
+
+.gr-v3 { grid-template-columns: .88fr 1.12fr; gap: clamp(60px, 9vw, 130px); background: #e9e2d7; }
+.gr-heading .boundary-note { max-width: 520px; }
+.gr-panel { padding: clamp(34px, 5vw, 62px); background: var(--paper); border: 1px solid #d6ccbc; }
+.gr-panel .lead-paragraph { max-width: 700px; }
+.gr-panel ol { margin: 36px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.gr-panel li { padding: 18px 0; display: grid; grid-template-columns: 48px 1fr; align-items: center; gap: 18px; border-bottom: 1px solid var(--line); }
+.gr-panel li span { color: var(--gold); font-family: Georgia, serif; }
+.gr-panel li b { font-size: 14px; }
+
+.team-v3 { display: grid; grid-template-columns: minmax(340px, .78fr) minmax(0, 1.22fr); gap: clamp(55px, 9vw, 130px); align-items: center; background: var(--white); }
+.team-portrait { margin: 0; position: relative; }
+.team-portrait::before { content: ""; position: absolute; inset: 20px -20px -20px 20px; border: 1px solid rgba(198,161,91,.54); }
+.team-portrait img { position: relative; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 24%; filter: saturate(.82) contrast(1.02); }
+.team-portrait figcaption { position: relative; padding: 18px 0 0; color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.team-copy > p:not(.section-kicker):not(.lead-paragraph) { max-width: 720px; color: var(--muted); }
+.team-principles { margin-top: 36px; border-top: 1px solid var(--line); }
+.team-principles div { padding: 18px 0; display: grid; grid-template-columns: 190px 1fr; gap: 24px; border-bottom: 1px solid var(--line); }
+.team-principles b { font-family: Georgia, serif; font-size: 17px; font-weight: 400; }
+.team-principles span { color: var(--muted); font-size: 12px; }
+
+@media (max-width: 1020px) {
+  .hero-v3 { grid-template-columns: 1fr .68fr; gap: 44px; }
+  .hero-person { right: -12px; }
+  .editorial-card { width: 58%; }
+  .team-v3 { gap: 58px; }
+}
+
+@media (max-width: 820px) {
+  .hero-v3 { grid-template-columns: 1fr; }
+  .hero-portrait { width: min(76vw, 480px); justify-self: center; }
+  .editorial-stage { min-height: 0; overflow: visible; box-shadow: none; background: transparent; }
+  .editorial-stage::after { display: none; }
+  .editorial-photo { position: relative; height: auto; aspect-ratio: 4 / 5; object-position: center 26%; }
+  .editorial-card { width: auto; min-height: 0; margin: 0; padding: 48px 40px; }
+  .case-grid-two { grid-template-columns: 1fr; }
+  .gr-v3, .team-v3 { grid-template-columns: 1fr; }
+  .team-portrait { width: min(80vw, 520px); }
+}
+
+@media (max-width: 580px) {
+  .hero-v3 h1 { font-size: 46px; }
+  .hero-person { right: -4px; bottom: 18px; width: 88%; padding: 15px 17px; }
+  .hero-person span { font-size: 18px; }
+  .editorial-card { padding: 38px 24px; }
+  .editorial-list li { grid-template-columns: 1fr; gap: 6px; }
+  .editorial-card h2, .team-copy h2 { font-size: 41px; }
+  .services-v3 .service-card { min-height: auto; }
+  .case-grid-two .case-card { min-height: auto; }
+  .gr-panel { padding: 28px 24px; }
+  .team-portrait { width: calc(100% - 18px); }
+  .team-principles div { grid-template-columns: 1fr; gap: 6px; }
+}

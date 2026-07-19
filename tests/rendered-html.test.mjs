@@ -30,9 +30,10 @@ test("server-renders the LEONTIEVA landing page", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>LEONTIEVA — продюсерский центр управляемой публичной траектории<\/title>/i);
-  assert.match(html, /Выстраиваем управляемую/);
-  assert.match(html, /GR и работа со стейкхолдерами/);
-  assert.match(html, /Елена и её люди/);
+  assert.match(html, /Публичная траектория/);
+  assert.match(html, /GR и общественные проекты/);
+  assert.match(html, /Ключевые решения — лично у Елены/);
+  assert.match(html, /elena-hero-v3\.jpg/);
   assert.match(html, /pr@leontieva-media\.ru/);
   assert.doesNotMatch(html, /Павел|STULER|Борисыч/i);
   assert.doesNotMatch(html, /hello@leontieva\.media/);
@@ -45,6 +46,9 @@ test("includes the required brand assets", async () => {
     access(new URL("../public/lm-brand-panel.png", import.meta.url)),
     access(new URL("../public/process-example.png", import.meta.url)),
     access(new URL("../public/process-flow-client-v2.png", import.meta.url)),
+    access(new URL("../public/elena-hero-v3.jpg", import.meta.url)),
+    access(new URL("../public/elena-about-v3.jpg", import.meta.url)),
+    access(new URL("../public/elena-editorial-v3.jpg", import.meta.url)),
   ]);
 });
 
