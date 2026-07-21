@@ -35,6 +35,10 @@ test("server-renders the LEONTIEVA landing page", async () => {
   assert.match(html, /Ключевые решения — лично у Елены/);
   assert.match(html, /Мы не выдаём список советов\. Мы ведём по маршруту/);
   assert.match(html, /Одна цель — один контур работы/);
+  assert.match(html, /Три понятных/);
+  assert.match(html, /Стратегическое решение для собственника/);
+  assert.match(html, /Мы подходим друг другу, если/);
+  assert.match(html, /Подготовить письмо/);
   assert.match(html, /elena-hero-v4\.jpg/);
   assert.match(html, /elena-production-v4\.jpg/);
   assert.match(html, /pr@leontieva-media\.ru/);
@@ -53,6 +57,7 @@ test("includes the required brand assets", async () => {
     access(new URL("../public/elena-production-v4.jpg", import.meta.url)),
     access(new URL("../public/elena-about-v3.jpg", import.meta.url)),
     access(new URL("../public/elena-editorial-v3.jpg", import.meta.url)),
+    access(new URL("../public/leontieva-og-v1.png", import.meta.url)),
   ]);
 });
 
@@ -62,10 +67,29 @@ test("keeps the GitHub Pages shell in sync with the active imagery", async () =>
   assert.match(html, /elena-hero-v4\.jpg/);
   assert.match(html, /elena-production-v4\.jpg/);
   assert.doesNotMatch(html, /elena-hero-v3\.jpg/);
+  assert.match(html, /\/strategy\/\?source=home-start/);
+  assert.match(html, /data-lead-form/);
   await Promise.all([
     access(new URL("../elena-hero-v4.jpg", import.meta.url)),
     access(new URL("../elena-production-v4.jpg", import.meta.url)),
   ]);
+});
+
+test("ships three distinct entry landing pages", async () => {
+  const [strategy, interview, support] = await Promise.all([
+    readFile(new URL("../strategy/index.html", import.meta.url), "utf8"),
+    readFile(new URL("../interview/index.html", import.meta.url), "utf8"),
+    readFile(new URL("../support/index.html", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(strategy, /Решение для собственника/);
+  assert.match(interview, /без импровизации на высокой ставке/);
+  assert.match(support, /Один продюсерский контур/);
+  for (const html of [strategy, interview, support]) {
+    assert.match(html, /data-lead-form/);
+    assert.match(html, /20 минут/);
+    assert.match(html, /Стоимость/);
+  }
 });
 
 test("serves the active apex domain without redirecting it", async () => {

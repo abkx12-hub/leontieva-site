@@ -22,16 +22,16 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/elena-hero-v4.jpg",
-        width: 2476,
-        height: 3372,
-        alt: "Елена Леонтьева — основатель и главный продюсер LEONTIEVA",
+        url: "/leontieva-og-v1.png",
+        width: 1200,
+        height: 630,
+        alt: "LEONTIEVA — стратегия, продюсирование и управляемый результат",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/elena-hero-v4.jpg"],
+    images: ["/leontieva-og-v1.png"],
   },
 };
 
