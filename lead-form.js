@@ -15,19 +15,19 @@
       const subject = `Запрос с сайта LEONTIEVA — ${company || name}`;
       const body = [
         `Имя: ${name}`,
-        `Компания / роль: ${company || "не указано"}`,
-        `Задача: ${String(data.get("task") || "").trim()}`,
+        `Сфера / деятельность: ${company || "не указано"}`,
+        `Тема / запрос: ${String(data.get("task") || "").trim()}`,
         `Срок: ${String(data.get("deadline") || "").trim() || "не указан"}`,
-        `Что уже сделано: ${String(data.get("done") || "").trim() || "не указано"}`,
+        `Формат / бюджет: ${String(data.get("done") || "").trim() || "не указано"}`,
         `Контакт: ${String(data.get("contact") || "").trim()}`,
         `Источник: ${source}`,
       ].join("\n\n");
-      window.dispatchEvent(new CustomEvent("leontieva:conversion", { detail: { type: "lead_form", source } }));
+      window.dispatchEvent(new CustomEvent("leontieva:contact-intent", { detail: { type: "email_draft", source, received: false } }));
       window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
   });
 
-  document.querySelectorAll('[data-conversion="email"]').forEach((link) => link.addEventListener("click", () => {
-    window.dispatchEvent(new CustomEvent("leontieva:conversion", { detail: { type: "email_click", source: campaign.join(" · ") || "site" } }));
+  document.querySelectorAll('[data-contact-action="email"]').forEach((link) => link.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("leontieva:contact-intent", { detail: { type: "email_link", received: false, source: campaign.join(" · ") || "site" } }));
   }));
 })();
