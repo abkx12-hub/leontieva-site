@@ -7,6 +7,7 @@
     const source = campaign.length ? campaign.join(" · ") : form.dataset.source || "site";
     const sourceField = form.querySelector('input[name="source"]');
     if (sourceField) sourceField.value = source;
+    form.addEventListener('input', () => form.querySelector('.draft-preview')?.remove());
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const data = new FormData(form);
@@ -51,7 +52,10 @@
       }
       preview.querySelector('pre').textContent = `Кому: ${email}\nТема: ${subject}\n\n${body}`;
       preview.querySelector('[data-open-draft]').href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      preview.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('effects-off') ? 'instant' : 'smooth';
+      const panel = form.closest('.request-scroll');
+      if (panel) panel.scrollTo({ top: preview.getBoundingClientRect().top - panel.getBoundingClientRect().top + panel.scrollTop - 20, behavior });
+      else preview.scrollIntoView({ behavior, block: 'center' });
     });
   });
 
