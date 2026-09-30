@@ -57,3 +57,5 @@ html.effects-off *{animation:none!important;transition:none!important}.effects-o
 @media(max-width:760px){.hero h1{font-size:clamp(68px,15vw,102px)}.hero{margin:0;padding-left:var(--pad);padding-right:var(--pad);padding-bottom:25px}.hero-media{height:450px;min-height:0}.motion-toggle{top:20px;right:20px;font-size:10px;padding:8px 10px}.hero-media .frame-label{font-size:9px;letter-spacing:.06em}.hero .hero-description{font-size:16px}}
 @media(max-width:360px){.hero h1{font-size:63px}.hero-media{height:400px}.hero-media .frame-label{top:20px;left:16px;font-size:8px}.motion-toggle{right:16px;padding:8px;max-width:120px}}
 @media(prefers-reduced-motion:reduce){.hero h1 em,.motion-ready .hero-word em{color:#edcbd4;background:none}.hero-media{animation:none}}
+
+html.effects-off{scroll-behavior:auto!important}
