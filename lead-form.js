@@ -35,7 +35,7 @@
         preview.setAttribute('role', 'region');
         preview.setAttribute('aria-label', 'Предварительный просмотр письма');
         preview.setAttribute('aria-live', 'polite');
-        preview.innerHTML = '<h3>Письмо готово к проверке</h3><p>Откройте его в своей почтовой программе и отправьте самостоятельно. Если почта не настроена, скопируйте текст.</p><pre></pre><a class="button button-gold" data-open-draft>Открыть письмо в почте ↗</a><button class="copy-draft" type="button">Скопировать текст письма</button><p class="copy-status" role="status"></p>';
+        preview.innerHTML = '<h3>Письмо готово к проверке</h3><p>Откройте его в своей почтовой программе и отправьте самостоятельно. Если почта не настроена, скопируйте текст.</p><pre></pre><a class="button button-email" data-open-draft>Открыть письмо в почте ↗</a><button class="copy-draft" type="button">Скопировать текст письма</button><p class="copy-status" role="status"></p>';
         form.append(preview);
         preview.querySelector('[data-open-draft]').addEventListener('click', () => {
           window.dispatchEvent(new CustomEvent('leontieva:contact-intent', { detail: { type: 'email_draft', source, received: false } }));
