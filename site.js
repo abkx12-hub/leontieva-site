@@ -15,7 +15,7 @@
   dialog.className = 'contact-dialog';
   dialog.setAttribute('aria-labelledby', 'request-title');
   dialog.setAttribute('aria-describedby', 'request-description');
-  dialog.innerHTML = '<header class="request-header"><p class="request-kicker">Елена Леонтьева · на связи</p><h2 id="request-title" tabindex="-1">Расскажите о задаче.</h2><p id="request-description">Елена уточнит площадку, состав работы и полную цену до оплаты.</p><button class="request-close" type="button" aria-label="Закрыть окно обращения">×</button></header><div class="request-scroll"></div><div class="request-direct"><span>Или напрямую</span><a class="channel-telegram" href="https://t.me/leontevalena" target="_blank" rel="noopener noreferrer">Telegram ↗</a><a class="channel-email" href="mailto:pr@leontieva-media.ru">Почта ↗</a><a class="channel-phone" href="tel:+79689103319">Телефон ↗</a></div>';
+  dialog.innerHTML = '<header class="request-header"><p class="request-kicker">Елена Леонтьева · на связи</p><h2 id="request-title" tabindex="-1">Расскажите о задаче.</h2><p id="request-description">Елена уточнит задачу, состав работы и полную цену до оплаты.</p><button class="request-close" type="button" aria-label="Закрыть окно обращения">×</button></header><div class="request-scroll"></div><div class="request-direct"><span>Или напрямую</span><a class="channel-telegram" href="https://t.me/leontevalena" target="_blank" rel="noopener noreferrer">Telegram ↗</a><a class="channel-email" href="mailto:pr@leontieva-media.ru">Почта ↗</a><a class="channel-phone" href="tel:+79689103319">Телефон ↗</a></div>';
   document.body.append(dialog);
   const scrollArea = dialog.querySelector('.request-scroll');
   const title = dialog.querySelector('#request-title');
